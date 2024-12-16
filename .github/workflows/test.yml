@@ -4,22 +4,16 @@ on:
     branches:
       - main
 jobs:
-  get-secret:
-    env:
-      HAS_SECRET: ${{ secrets.TEST_SECRET != '' }}
   print-positive:
-    if: env.HAS_SECRET
     runs-on: ubuntu-latest
     env:
+      MY_SECRET: ${{ secrets.MY_SECRET }}
     steps:
-      - name: Echo
+      - name: Echo Positive
+        if: ${{ env.MY_SECRET }}
         run: |
           echo "YASSS QUEEN"
-  print-negative:
-    if: ${{ !env.HAS_SECRET }}
-    runs-on: ubuntu-latest
-    env:
-    steps:
-      - name: Echo
+      - name: Echo Negative
+        if: ${{ !env.MY_SECRET }}
         run: |
           echo "NO SIR"
