@@ -10,7 +10,7 @@ jobs:
       MY_SECRET: ${{ secrets.MY_SECRET }}
     steps:
       - name: Echo Positive
-        if: ${{ env.MY_SECRET }}
+        if: env.MY_SECRET && github.repository_owner == 'jranson'
         run: |
           echo "YASSS QUEEN"
       - name: Echo Negative
