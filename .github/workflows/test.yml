@@ -1,0 +1,25 @@
+name: Merge to Main / Deploy to Dev
+on:
+  push:
+    branches:
+      - main
+jobs:
+  get-secret:
+    env:
+      HAS_SECRET: ${{ secrets.TEST_SECRET != '' }}
+  print-positive:
+    if: env.HAS_SECRET
+    runs-on: ubuntu-latest
+    env:
+    steps:
+      - name: Echo
+        run: |
+          echo "YASSS QUEEN"
+  print-negative:
+    if: ${{ !env.HAS_SECRET }}
+    runs-on: ubuntu-latest
+    env:
+    steps:
+      - name: Echo
+        run: |
+          echo "NO SIR"
